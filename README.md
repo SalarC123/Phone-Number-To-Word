@@ -9,6 +9,8 @@ This **Python** code takes any phone number in the format of either *111-222-333
 
 ## How Do I Use It?
 
+Remember to do this command in your terminal or cmd prompt first: `pip3 install enchant`
+
 `reversephone('123.883.6745','7-0')`
 
 When you call the function, put your phone number as the *first* argument (keeping in mind that it has to be in one of the mentioned formats above) and can not include a 0 or 1 because they do not correlate to any letters on the digit pad
