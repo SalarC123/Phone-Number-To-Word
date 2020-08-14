@@ -2,19 +2,25 @@ import itertools
 import enchant
 
 def reversephone(phonenum, wordsplit):
+    # Initializes built in dictionary
     d = enchant.Dict('en_US')
     cutphone = ''
     letterdict = {'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
     if '-' in phonenum or '.' in phonenum:
+        # Cuts out the area code for numbers with '.' or '-'
         cutphone = ''.join(phonenum[-8:].split(phonenum[-5]))
     else:
+        # Cuts out area code for plain numbers
         cutphone = phonenum[-7:]
 
     try:
         if wordsplit == '7-0':
-            for i in itertools.product(list(letterdict[cutphone[0]]),list(letterdict[cutphone[1]]),list(letterdict[cutphone[2]]),list(letterdict[cutphone[3]]),list(letterdict[cutphone[4]]),list(letterdict[cutphone[5]]),list(letterdict[cutphone[6]]),):
+            # Makes combinations with the possible letters in the 7 word to 0 word pattern
+            for i in itertools.product(list(letterdict[cutphone[0]]),list(letterdict[cutphone[1]]),list(letterdict[cutphone[2]]),list(letterdict[cutphone[3]]),list(letterdict[cutphone[4]]),list(letterdict[cutphone[5]]),list(letterdict[cutphone[6]])):
                 word = ''.join(i)
+                # Checks if word is in the dictionary
                 if d.check(word):
+                    # Returns area code followed by all possible word combinations
                     print(f'{phonenum[:3]}-{word.upper()}')
 
         elif wordsplit == '3-4':
@@ -28,6 +34,7 @@ def reversephone(phonenum, wordsplit):
                 word = ''.join(i)
                 if d.check(word):
                     secondwordlist.append(word)
+            # Makes every possible combination with the words in the two lists
             for i in itertools.product(firstwordlist,secondwordlist):
                 word = ''.join(i)
                 print(f'{phonenum[:3]}-{word.upper()}')
@@ -125,6 +132,6 @@ def reversephone(phonenum, wordsplit):
                 '1-6'  for any single letter followed by a six letter word
               """)
 
-reversephone('123.883.6745','7-0')
+reversephone('123.449.6753','2-5')
 
-# TO TURN INTO WEBSITE --> https://blog.pythonanywhere.com/169/
+# TO DEPLOY ON PYTHONANYWHERE --> https://blog.pythonanywhere.com/169/
